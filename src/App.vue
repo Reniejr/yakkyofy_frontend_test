@@ -8,9 +8,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import SignIn from '@/views/SignIn.vue'
 import Users from '@/views/Users.vue'
+import Loader from '@/components/main/Loader.vue'
 
 @Component({
-  components: { Users, SignIn }
+  components: { Users, SignIn, Loader }
 })
 export default class App extends Vue {}
 </script>

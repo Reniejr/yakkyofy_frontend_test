@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from 'vue-router'
 import SignIn from '../views/SignIn.vue'
 import Users from '../views/Users.vue'
+import Loader from '@/components/main/Loader.vue'
+import LandingPage from '../views/LandingPage.vue'
 
 Vue.use(VueRouter)
 
@@ -13,14 +15,24 @@ async function beforeEnter(to: Route, from: Route, next: NavigationGuardNext<Vue
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'SignIn',
-    component: SignIn
+    name: 'LandingPage',
+    component: LandingPage
   },
+  // {
+  //   path: '/',
+  //   name: 'SignIn',
+  //   component: SignIn
+  // },
   {
     path: '/users',
     name: 'Users',
-    beforeEnter,
+    // beforeEnter,
     component: Users
+  },
+  {
+    path: '/loader',
+    name: 'Loader',
+    component: Loader
   }
 ]
 
