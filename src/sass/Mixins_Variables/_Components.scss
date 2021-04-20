@@ -1,0 +1,39 @@
+@mixin primary-btn(){
+    min-width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid $primary;
+    background-color: $primary;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+        background-color: $secondary;
+    }
+}
+
+@mixin primary-form-group(){
+    margin-bottom: 1em;
+  
+      .label {
+        display: block;
+        margin-bottom: 0.25em;
+      }
+  
+      .input {
+        padding: 12px;
+        width: 100%;
+        border: 1px solid #eaeaea;
+        border-radius: 3px;
+        background-color: white;
+  
+        &:focus {
+          border-color: gray;
+        }
+  
+        &::placeholder {
+          color: gray;
+        }
+      }
+}

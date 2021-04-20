@@ -18,11 +18,11 @@ const routes: Array<RouteConfig> = [
     name: 'LandingPage',
     component: LandingPage
   },
-  // {
-  //   path: '/',
-  //   name: 'SignIn',
-  //   component: SignIn
-  // },
+  {
+    path: '/sign-in',
+    name: 'SignIn',
+    component: SignIn
+  },
   {
     path: '/users',
     name: 'Users',

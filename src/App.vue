@@ -22,4 +22,9 @@ export default class App extends Vue {}
   font-family: 'Roboto', sans-serif !important;
   box-sizing: border-box;
 }
+.page{
+  background-color: $third;
+  min-height: 100vh;
+  position: relative;
+}
 </style>

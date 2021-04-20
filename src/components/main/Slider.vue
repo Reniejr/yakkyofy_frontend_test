@@ -47,9 +47,14 @@ export default {
   @include absoluteCenter();
   width: 50%;
   overflow: hidden;
+  backdrop-filter: blur(8px);
+  background-color: rgba($color: white, $alpha: 0.3);
+  border-radius: 10px;
+  padding: 1rem 0;
+  animation: entrance 2s linear;
   .slider-container {
     @include flexBox(row, none, center);
-    animation: slide 20s linear infinite;
+    animation: slide 30s linear infinite;
     .slide {
       @include flexBox(row, space-evenly, center);
     }
@@ -59,6 +64,17 @@ export default {
       100% {
         margin-left: -400%;
       }
+    }
+  }
+  @keyframes entrance {
+    0% {
+      max-width: 0px;
+    }
+    50% {
+      max-width: 0px;
+    }
+    100% {
+      max-width: 100%;
     }
   }
 }

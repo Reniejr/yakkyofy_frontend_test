@@ -1,23 +1,26 @@
 <template>
-  <form class="guest-form">
-    <h1 class="title">Welcome back</h1>
-    <h3 class="sub-title">email: eve.holt@reqres.in</h3>
-    <h3 class="sub-title">password: any not empty password</h3>
+  <div id="sign-in" class="page">
+    <img src="@/assets/Vue-Logo.png" alt="" />
+    <form class="guest-form">
+      <h1 class="title">Join the VUEsers</h1>
+      <h3 class="sub-title">email: eve.holt@reqres.in</h3>
+      <h3 class="sub-title">password: any not empty password</h3>
 
-    <div class="divider"></div>
+      <div class="divider"></div>
 
-    <div class="form-group">
-      <label class="label" for="input">Email</label>
-      <input class="input" v-model="email" required type="text" />
-    </div>
+      <div class="form-group">
+        <label class="label" for="input">Email</label>
+        <input class="input" v-model="email" required type="text" />
+      </div>
 
-    <div class="form-group">
-      <label class="label" for="input">Password</label>
-      <input class="input" v-model="password" required type="password" />
-    </div>
+      <div class="form-group">
+        <label class="label" for="input">Password</label>
+        <input class="input" v-model="password" required type="password" />
+      </div>
 
-    <button @click="submit">submit</button>
-  </form>
+      <button @click="submit">submit</button>
+    </form>
+  </div>
 </template>
 
 <script lang="ts">
@@ -48,58 +51,43 @@ export default class SignIn extends Vue {
 }
 </script>
 
-<style lang="scss">
-.guest-form {
-  max-width: 500px;
-  margin: 100px auto;
-
-  .title {
-    color: #243d56;
-    font-size: 24px;
-    margin-bottom: 12px;
+<style scoped lang="scss">
+#sign-in {
+  img {
+    @include positions(absolute, 10%, none, none, 10%);
+    rotate: -50deg;
   }
-  .sub-title {
-    margin-top: 6px;
-    font-size: 16px;
-    color: grey;
-  }
-  .divider {
-    border-top: 3px solid #243d56;
-    max-width: 120px;
-    margin: 18px 0px;
-  }
+  .guest-form {
+    max-width: 700px;
+    margin: auto;
+    padding: 100px;
 
-  .form-group {
-    margin-bottom: 1em;
-
-    .label {
-      display: block;
-      margin-bottom: 0.25em;
+    background-color: #fff;
+    min-height: 100vh;
+    .title {
+      color: #243d56;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .sub-title {
+      margin-top: 6px;
+      font-size: 16px;
+      color: grey;
+    }
+    .divider {
+      border-top: 3px solid #243d56;
+      max-width: 120px;
+      margin: 18px 0px;
     }
 
-    .input {
-      padding: 12px;
-      width: 100%;
-      border: 1px solid #eaeaea;
-      border-radius: 3px;
-      background-color: white;
-
-      &:focus {
-        border-color: gray;
-      }
-
-      &::placeholder {
-        color: gray;
-      }
+    .form-group {
+      @include primary-form-group();
     }
-  }
 
-  button {
-    background-color: #243d56;
-    border: none;
-    border-radius: 3px;
-    color: #fff;
-    padding: 12px 22px;
+    button {
+      @include primary-btn();
+    }
   }
 }
 </style>
