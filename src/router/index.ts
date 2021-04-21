@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from 'vue-router'
-import Users from '../views/Users.vue'
-import Loader from '@/components/main/Loader.vue'
 import LandingPage from '../views/LandingPage.vue'
 import Register from '../views/Register.vue'
 import UserPage from '../views/UserPage.vue'
@@ -29,11 +27,6 @@ const routes: Array<RouteConfig> = [
     name: 'UserPage',
     // beforeEnter,
     component: UserPage
-  },
-  {
-    path: '/loader',
-    name: 'Loader',
-    component: Loader
   }
 ]
 

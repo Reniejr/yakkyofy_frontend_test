@@ -1,10 +1,5 @@
 <template>
-  <teleport
-    to=".modals"
-    id="sign-in"
-    class="modal"
-    :style="{ marginTop: modal ? '' : '-300%' }"
-  >
+  <div class="modal" :style="{ marginTop: modal ? '' : '-300%' }">
     <img src="@/assets/Vue-Logo.png" alt="" />
     <form class="guest-form">
       <button class="close-modal" @click="toggleModal" type="button">X</button>
@@ -24,15 +19,13 @@
 
       <button @click="submit">Login</button>
     </form>
-  </teleport>
+  </div>
 </template>
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
-import { login } from "@/utilities";
 
 @Component({
-  props: ["show"],
   computed: {
     modal() {
       return this.$store.state.showModal;
@@ -53,6 +46,7 @@ export default class SignIn extends Vue {
       user =>
         user.email === this.user.email && user.password === this.user.password
     );
+    // console.log(allUsers)
     if (loggedUser.id) {
       this.$router.push(`/user/${loggedUser.id}`);
     }
@@ -64,7 +58,7 @@ export default class SignIn extends Vue {
 </script>
 
 <style scoped lang="scss">
-#sign-in {
+.modal {
   width: 100%;
   min-height: 100vh;
   @include positions(absolute, 0, none, none, 0);

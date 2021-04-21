@@ -26,7 +26,7 @@
 //PERSONAL COMPONENTS IMPORTS
 import UserCard from "@/components/main/UserCard.vue";
 //UTILITIES IMPORTS
-import { chunkArray, getFetch } from "@/utilities/index.js";
+import { chunkArray } from "@/utilities/index.js";
 
 export default {
   name: "Slider",
@@ -38,28 +38,12 @@ export default {
       slides: []
     };
   },
-  computed:{
-    allUsers() { 
-      return chunkArray(this.$store.state.usersList, 3);
+  computed: {
+    allUsers() {
+      return chunkArray(this.$store.getters.allUsers, 3);
     }
   },
   mounted() {
-    // (async () => {
-    //   const result = await getFetch("/users", null);
-    //   if (result.total_pages > 0) {
-    //     let allResults = [];
-    //     let allUsers = [];
-    //     for (let i = 0; i < result.total_pages; i++) {
-    //       const result2 = await getFetch("/users", i + 1);
-    //       allResults = [...allResults, ...result2.data];
-    //       allUsers = [...allUsers, ...result2.data];
-    //     }
-    //     const usersList = chunkArray(allResults, 3);
-    //     this.slides = usersList;
-    //     this.$store.commit("setUsersList", allUsers);
-    //   }
-    // })();
-    // const allUsers = this.$store.state.usersList;
     const sliderInfos = chunkArray(this.slides, 3);
     this.slides = sliderInfos;
   }

@@ -14,6 +14,7 @@
 </template>
 <script>
 import Slider from "@/components/main/Slider.vue";
+import { getFetch } from "@/utilities";
 
 export default {
   name: "LandingPage",
@@ -21,8 +22,8 @@ export default {
     Slider
   },
   methods: {
-    toggleModal(){
-      this.$store.dispatch("toggleModal")
+    toggleModal() {
+      this.$store.dispatch("toggleModal");
     }
   }
 };

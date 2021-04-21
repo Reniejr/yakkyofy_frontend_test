@@ -1,40 +1,32 @@
 import Vue from "vue";
-import Vuex from "vuex";
-
+import Vuex, { Module } from "vuex";
+import { userMod } from './modules/user'
+import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    userMod
+  },
   state: {
     showModal: false,
-    usersList: [],
-    user: {},
+    loader: false
   },
   mutations: {
     toggleModal(state) {
-      state.showModal = !state.showModal;
+      state.showModal = !state.showModal
     },
-    setUsersList(state, usersList) {
-      state.usersList = usersList;
-    },
-    setUser(state, user) {
-      state.user = user;
-    },
-    addUser(state, user) {
-      state.usersList = state.usersList.concat(user)
-    },
+    setLoader(state) {
+      state.loader = !state.loader
+    }
   },
   actions: {
     toggleModal({ commit }) {
       commit("toggleModal");
     },
-    setUsersList({ commit }, usersList) {
-      commit("setUsersList", usersList);
-    },
-    setUser({ commit }, user) {
-      commit("setUser", user);
-    },
-    addUser({ commit }, user) {
-      commit("addUser", user);
-    },
+    setLoader({ commit }) {
+      commit("setLoader")
+    }
   },
+  plugins: [createPersistedState()]
 });

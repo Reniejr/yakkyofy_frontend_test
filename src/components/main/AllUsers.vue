@@ -32,8 +32,8 @@ export default {
   },
   computed: {
     pages() {
-      const otherUsers = this.$store.state.usersList.filter(
-        user => user.id !== this.$store.state.user.id
+      const otherUsers = this.$store.getters.allUsers.filter(
+        user => user.id !== this.$store.getters.currentUser.id
       );
       return chunkArray(otherUsers, 6);
     }
@@ -65,12 +65,12 @@ h2 {
     @include flexBox(column, none, center);
     cursor: pointer;
     transition: all 0.3s ease;
-    img{
+    img {
       box-shadow: 0px 8px 20px -10px $primary;
     }
-    &:hover{
+    &:hover {
       scale: 1.1;
-      img{
+      img {
         box-shadow: 0px 8px 20px -5px $secondary;
       }
     }

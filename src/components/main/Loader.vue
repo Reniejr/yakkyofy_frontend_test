@@ -1,21 +1,21 @@
 <template>
-  <div id="loader">
+  <div id="loader" v-if="this.$store.state.loader">
     <Vue1 class="major" />
     <Vue2 class="minor" />
     <h1>Loading...</h1>
   </div>
 </template>
 <script>
-import Vue1 from '@/assets/Loader/Vue1.svg'
-import Vue2 from '@/assets/Loader/Vue2.svg'
+import Vue1 from "@/assets/Loader/Vue1.svg";
+import Vue2 from "@/assets/Loader/Vue2.svg";
 
 export default {
-  name: 'Loader',
+  name: "Loader",
   components: {
     Vue1,
     Vue2
   }
-}
+};
 </script>
 <style scoped lang="scss">
 #loader {
@@ -25,6 +25,7 @@ export default {
   backdrop-filter: blur(10px);
   min-height: 100vh;
   overflow: hidden;
+  z-index: 10000;
   svg {
     @include absoluteCenter();
     stroke-width: 4px;

@@ -1,7 +1,8 @@
 <template>
   <div id="app-wrapper">
     <router-view />
-    <SignIn :show="login" />
+    <SignIn />
+    <Loader />
   </div>
 </template>
 
@@ -11,11 +12,11 @@ import SignIn from "@/components/main/SignIn.vue";
 import Users from "@/views/Users.vue";
 import Loader from "@/components/main/Loader.vue";
 import UserPage from "@/views/UserPage.vue";
-import { getFetch } from "@/utilities";
+import { getFetch, getFromLocal } from "@/utilities";
 
 @Component({
   components: { Users, SignIn, Loader, UserPage },
-  mounted() {
+  updated() {
     (async () => {
       const result = await getFetch("/users", null);
       if (result.total_pages > 0) {
@@ -24,7 +25,13 @@ import { getFetch } from "@/utilities";
           const result2 = await getFetch("/users", i + 1);
           allUsers = [...allUsers, ...result2.data];
         }
-        this.$store.commit("setUsersList", allUsers);
+        const newUsers = getFromLocal();
+        if (newUsers.length > 0) {
+          const completeUsers = [...allUsers, ...newUsers];
+          this.$store.commit("setUsersList", completeUsers);
+        } else {
+          this.$store.commit("setUsersList", allUsers);
+        }
       }
     })();
   }
