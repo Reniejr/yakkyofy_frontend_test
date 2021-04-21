@@ -23,7 +23,6 @@ export const getFetch = async (endpoint, page) => {
     headers: { "content-type": "application/json" },
   });
   const result = await response.json();
-  console.log(result);
   return result;
 };
 

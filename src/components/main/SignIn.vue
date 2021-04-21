@@ -1,10 +1,10 @@
 <template>
   <div class="modal" :style="{ marginTop: modal ? '' : '-300%' }">
     <img src="@/assets/Vue-Logo.png" alt="" />
-    <form class="guest-form">
+    <form class="guest-form" @submit="submit">
       <button class="close-modal" @click="toggleModal" type="button">X</button>
       <h1 class="title">Welcome Back VUEser</h1>
-
+      <p class="refused" v-show="error">We are sorry, something went wrong!</p>
       <div class="divider"></div>
 
       <div class="form-group">
@@ -17,13 +17,14 @@
         <input class="input" v-model="user.password" required type="password" />
       </div>
 
-      <button @click="submit">Login</button>
+      <button type="submit">Login</button>
     </form>
   </div>
 </template>
 
 <script>
 import { Component, Vue } from "vue-property-decorator";
+import { getFromLocal } from "@/utilities/index.js";
 
 @Component({
   computed: {
@@ -38,17 +39,29 @@ export default class SignIn extends Vue {
     password: ""
   };
 
+  error = false;
+
   async submit(e) {
     e.preventDefault();
     // const loggedUser = await login(this.user);
-    const allUsers = this.$store.state.usersList;
-    const loggedUser = allUsers.find(
+    const users = getFromLocal();
+    const loggedUser = users.find(
       user =>
         user.email === this.user.email && user.password === this.user.password
     );
     // console.log(allUsers)
-    if (loggedUser.id) {
-      this.$router.push(`/user/${loggedUser.id}`);
+    this.$store.commit("setLoader");
+    if (loggedUser !== undefined) {
+      setTimeout(() => {
+        this.$store.commit("toggleModal");
+        this.$store.commit("setLoader");
+        this.$router.push(`/user/${loggedUser.id}`);
+      }, 5000);
+    } else {
+      setTimeout(() => {
+        this.$store.commit("setLoader");
+        this.error = true
+      }, 5000);
     }
   }
   toggleModal() {
@@ -86,6 +99,11 @@ export default class SignIn extends Vue {
         background-color: $secondary;
         color: $primary;
       }
+    }
+    .refused{
+      color: red;
+      font-size: 1.2rem;
+      font-weight: 700;
     }
     max-width: 600px;
     padding: 100px;

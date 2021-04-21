@@ -16,7 +16,7 @@ import { getFetch, getFromLocal } from "@/utilities/index.js";
 
 @Component({
   components: { Users, SignIn, Loader, UserPage },
-  updated() {
+  mounted() {
     (async () => {
       const result = await getFetch("/users", null);
       if (result.total_pages > 0) {
@@ -26,7 +26,6 @@ import { getFetch, getFromLocal } from "@/utilities/index.js";
           allUsers = [...allUsers, ...result2.data];
         }
         const newUsers = getFromLocal();
-        console.log(newUsers)
         if (newUsers.length > 0) {
           const completeUsers = [...allUsers, ...newUsers];
           this.$store.commit("setUsersList", completeUsers);

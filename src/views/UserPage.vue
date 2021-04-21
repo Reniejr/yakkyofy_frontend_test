@@ -24,6 +24,7 @@
 <script>
 import AllUsers from "@/components/main/AllUsers";
 import Exit from "@/assets/exit.svg";
+import { getFetch, getFromLocal } from "@/utilities/index.js";
 
 export default {
   name: "UserPage",
@@ -36,10 +37,29 @@ export default {
       return this.$store.getters.currentUser;
     }
   },
-  methods:{
-    logout(){
-      this.$router.push('/')
+  methods: {
+    logout() {
+      this.$router.push("/");
     }
+  },
+  mounted() {
+    (async () => {
+      const result = await getFetch("/users", null);
+      if (result.total_pages > 0) {
+        let allUsers = [];
+        for (let i = 0; i < result.total_pages; i++) {
+          const result2 = await getFetch("/users", i + 1);
+          allUsers = [...allUsers, ...result2.data];
+        }
+        const newUsers = getFromLocal();
+        if (newUsers.length > 0) {
+          const completeUsers = [...allUsers, ...newUsers];
+          this.$store.commit("setUsersList", completeUsers);
+        } else {
+          this.$store.commit("setUsersList", allUsers);
+        }
+      }
+    })();
   }
 };
 </script>
@@ -55,10 +75,10 @@ export default {
     padding: 10px;
     padding-left: 3rem;
     transition: all 0.3s ease;
-    &:hover{
+    &:hover {
       right: 4%;
     }
-    svg{
+    svg {
       width: 40px;
       height: 40px;
       margin-left: 1rem;
