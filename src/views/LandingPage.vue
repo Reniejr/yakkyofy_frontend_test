@@ -4,23 +4,28 @@
       <img src="@/assets/Logo.png" alt="" class="logo" />
       <div class="controls">
         <h3>Welcome to Vue Users</h3>
-        <router-link tag="button" to="/sign-in">Join us</router-link>
+        <router-link tag="button" to="/register">Join us</router-link>
         or
-        <router-link tag="button" to="#">Login</router-link>
+        <button @click="showModal">Login</button>
       </div>
     </div>
     <Slider />
   </div>
 </template>
 <script>
-import Slider from '@/components/main/Slider.vue'
+import Slider from "@/components/main/Slider.vue";
 
 export default {
-  name: 'LandingPage',
+  name: "LandingPage",
   components: {
     Slider
+  },
+  methods: {
+    showModal() {
+      this.$emit("showLogin");
+    }
   }
-}
+};
 </script>
 <style scoped lang="scss">
 #landing-page {

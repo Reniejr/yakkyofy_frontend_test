@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter, { NavigationGuardNext, Route, RouteConfig } from 'vue-router'
-import SignIn from '../views/SignIn.vue'
 import Users from '../views/Users.vue'
 import Loader from '@/components/main/Loader.vue'
 import LandingPage from '../views/LandingPage.vue'
+import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -16,12 +16,12 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'LandingPage',
-    component: LandingPage
+    component: LandingPage,
   },
   {
-    path: '/sign-in',
-    name: 'SignIn',
-    component: SignIn
+    path: '/register',
+    name: 'Register',
+    component: Register
   },
   {
     path: '/users',

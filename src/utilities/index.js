@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable camelcase */
+/* eslint-disable @typescript-eslint/camelcase */
 export const chunkArray = (array, value) => {
   const chunkContainer = [],
     times = array.length / value,
@@ -21,5 +23,36 @@ export const getFetch = async (endpoint, page) => {
     headers: { "content-type": "application/json" },
   });
   const result = await response.json();
+  return result;
+};
+
+export const createUser = async (userInfo) => {
+  const body = {
+    first_name: userInfo.firstName,
+    last_name: userInfo.lastName,
+    email: userInfo.email,
+    password: userInfo.password,
+  };
+  const response = await fetch(`${process.env.VUE_APP_BASE_URL}/users`, {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: new Headers({
+      "content-type": "application/json",
+    }),
+  });
+  const result = await response.json();
+  console.log(result);
+  return result;
+};
+export const login = async (user) => {
+  const response = await fetch(`${process.env.VUE_APP_BASE_URL}/login`, {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: new Headers({
+      "content-type": "application/json",
+    }),
+  });
+  const result = await response.json();
+  console.log(result);
   return result;
 };
