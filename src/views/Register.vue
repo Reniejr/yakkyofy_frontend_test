@@ -53,7 +53,7 @@ export default class Register extends Vue {
     if (newUser) {
       this.$store.commit("addUser", newUser);
       this.$store.commit("setUser", newUser);
-      localStorage.setItem(`user${newUser.id}`, newUser)
+      localStorage.setItem(`user${newUser.id}`, JSON.stringify(newUser))
       setTimeout(() => {
         this.$store.commit("setLoader");
         this.$router.push(`/user/${newUser.id}`);

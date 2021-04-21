@@ -18,12 +18,12 @@ export const getFetch = async (endpoint, page) => {
   page !== null
     ? (url = `${process.env.VUE_APP_BASE_URL}${endpoint}?page=${page}`)
     : (url = `${process.env.VUE_APP_BASE_URL}${endpoint}`);
-  console.log(url);
   const response = await fetch(url, {
     method: "GET",
     headers: { "content-type": "application/json" },
   });
   const result = await response.json();
+  console.log(result);
   return result;
 };
 
@@ -61,6 +61,9 @@ export const login = async (user) => {
 export const getFromLocal = () => {
   let values = [];
   const keys = Object.keys(localStorage).filter((key) => key.includes("user"));
-  values = keys.map((key) => JSON.parse(localStorage[key]));
+  console.log(keys);
+  if (keys.length > 0) {
+    values = keys.map((key) => JSON.parse(localStorage[key]));
+  }
   return values;
 };

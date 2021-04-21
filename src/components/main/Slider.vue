@@ -6,17 +6,13 @@
     >
       <div
         class="slide"
-        v-for="(slide, sI) in allUsers"
-        :key="sI"
+        v-for="(slide, index) in allUsers"
+        :key="index"
         :style="{ width: `${100 / (allUsers.length + 1)}%` }"
       >
         <UserCard v-for="user in slide" :key="user.id" :userInfo="user" />
       </div>
-      <div
-        class="slide"
-        :key="sI"
-        :style="{ width: `${100 / (allUsers.length + 1)}%` }"
-      >
+      <div class="slide" :style="{ width: `${100 / (allUsers.length + 1)}%` }">
         <UserCard v-for="user in allUsers[0]" :key="user.id" :userInfo="user" />
       </div>
     </div>

@@ -12,7 +12,7 @@ import SignIn from "@/components/main/SignIn.vue";
 import Users from "@/views/Users.vue";
 import Loader from "@/components/main/Loader.vue";
 import UserPage from "@/views/UserPage.vue";
-import { getFetch, getFromLocal } from "@/utilities";
+import { getFetch, getFromLocal } from "@/utilities/index.js";
 
 @Component({
   components: { Users, SignIn, Loader, UserPage },
@@ -26,6 +26,7 @@ import { getFetch, getFromLocal } from "@/utilities";
           allUsers = [...allUsers, ...result2.data];
         }
         const newUsers = getFromLocal();
+        console.log(newUsers)
         if (newUsers.length > 0) {
           const completeUsers = [...allUsers, ...newUsers];
           this.$store.commit("setUsersList", completeUsers);
