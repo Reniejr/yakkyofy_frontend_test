@@ -17,7 +17,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 #loader {
   @include positions(absolute, 0, none, none, 0);
   width: 100%;

@@ -1,10 +1,40 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {}
-})
+  state: {
+    showModal: false,
+    usersList: [],
+    user: {},
+  },
+  mutations: {
+    toggleModal(state) {
+      state.showModal = !state.showModal;
+    },
+    setUsersList(state, usersList) {
+      state.usersList = usersList;
+    },
+    setUser(state, user) {
+      state.user = user;
+    },
+    addUser(state, user) {
+      state.usersList = state.usersList.concat(user)
+    },
+  },
+  actions: {
+    toggleModal({ commit }) {
+      commit("toggleModal");
+    },
+    setUsersList({ commit }, usersList) {
+      commit("setUsersList", usersList);
+    },
+    setUser({ commit }, user) {
+      commit("setUser", user);
+    },
+    addUser({ commit }, user) {
+      commit("addUser", user);
+    },
+  },
+});

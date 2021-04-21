@@ -4,6 +4,7 @@ import Users from '../views/Users.vue'
 import Loader from '@/components/main/Loader.vue'
 import LandingPage from '../views/LandingPage.vue'
 import Register from '../views/Register.vue'
+import UserPage from '../views/UserPage.vue'
 
 Vue.use(VueRouter)
 
@@ -24,10 +25,10 @@ const routes: Array<RouteConfig> = [
     component: Register
   },
   {
-    path: '/users',
-    name: 'Users',
+    path: '/user/:id',
+    name: 'UserPage',
     // beforeEnter,
-    component: Users
+    component: UserPage
   },
   {
     path: '/loader',

@@ -6,7 +6,7 @@
         <h3>Welcome to Vue Users</h3>
         <router-link tag="button" to="/register">Join us</router-link>
         or
-        <button @click="showModal">Login</button>
+        <button @click="toggleModal">Login</button>
       </div>
     </div>
     <Slider />
@@ -21,8 +21,8 @@ export default {
     Slider
   },
   methods: {
-    showModal() {
-      this.$emit("showLogin");
+    toggleModal(){
+      this.$store.dispatch("toggleModal")
     }
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <div id="app-wrapper">
-    <router-view @showLogin="showLogin" />
-    <SignIn :show="login" @showLogin="showLogin" />
+    <router-view />
+    <SignIn :show="login" />
   </div>
 </template>
 
@@ -10,17 +10,26 @@ import { Component, Vue } from "vue-property-decorator";
 import SignIn from "@/components/main/SignIn.vue";
 import Users from "@/views/Users.vue";
 import Loader from "@/components/main/Loader.vue";
+import UserPage from "@/views/UserPage.vue";
+import { getFetch } from "@/utilities";
 
 @Component({
-  components: { Users, SignIn, Loader }
-})
-export default class App extends Vue {
-  login = false;
-
-  showLogin() {
-    this.login = !this.login;
+  components: { Users, SignIn, Loader, UserPage },
+  mounted() {
+    (async () => {
+      const result = await getFetch("/users", null);
+      if (result.total_pages > 0) {
+        let allUsers: Array<any> = [];
+        for (let i = 0; i < result.total_pages; i++) {
+          const result2 = await getFetch("/users", i + 1);
+          allUsers = [...allUsers, ...result2.data];
+        }
+        this.$store.commit("setUsersList", allUsers);
+      }
+    })();
   }
-}
+})
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">

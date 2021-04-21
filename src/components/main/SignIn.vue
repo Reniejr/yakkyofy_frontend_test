@@ -3,7 +3,7 @@
     to=".modals"
     id="sign-in"
     class="modal"
-    :style="{ marginTop: show ? '' : '-300%' }"
+    :style="{ marginTop: modal ? '' : '-300%' }"
   >
     <img src="@/assets/Vue-Logo.png" alt="" />
     <form class="guest-form">
@@ -32,7 +32,12 @@ import { Component, Vue } from "vue-property-decorator";
 import { login } from "@/utilities";
 
 @Component({
-  props: ["show"]
+  props: ["show"],
+  computed: {
+    modal() {
+      return this.$store.state.showModal;
+    }
+  }
 })
 export default class SignIn extends Vue {
   user = {
@@ -42,10 +47,18 @@ export default class SignIn extends Vue {
 
   async submit(e) {
     e.preventDefault();
-    const loggedUser = await login(this.user);
+    // const loggedUser = await login(this.user);
+    const allUsers = this.$store.state.usersList;
+    const loggedUser = allUsers.find(
+      user =>
+        user.email === this.user.email && user.password === this.user.password
+    );
+    if (loggedUser.id) {
+      this.$router.push(`/user/${loggedUser.id}`);
+    }
   }
   toggleModal() {
-    this.$emit("showLogin");
+    this.$store.commit("toggleModal");
   }
 }
 </script>

@@ -42,15 +42,18 @@ export default class Register extends Vue {
     email: "",
     password: "",
     firstName: "",
-    lastName: ""
+    lastName: "",
   };
 
   async submit(e) {
     e.preventDefault();
     const newUser = await createUser(this.user);
-    console.log(newUser);
+    // console.log(newUser);
     if (newUser) {
+      this.$store.commit("addUser", newUser);
+      this.$store.commit("setUser", newUser);
       this.$router.push(`/user/${newUser.id}`);
+      // this.$router.push(`/`);
     }
   }
 }
